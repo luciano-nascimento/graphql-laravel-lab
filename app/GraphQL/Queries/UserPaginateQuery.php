@@ -13,25 +13,21 @@ use App\GraphQL\Types\UserType;
 use GraphQL;
 use App\Models\User;
 
-class UserQuery extends Query
+class UserPaginateQuery extends Query
 {
     protected $attributes = [
-        'name' => 'user',
+        'name' => 'userPaginate',
         'description' => 'A query'
     ];
 
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('user'));
+        return GraphQL::paginate('user');
     }
 
     public function args(): array
     {
         return [
-            'id' => [
-                'type' => Type::int(),
-                'description' => 'O id do usuário no banco'
-            ],
             'paginate' => [
                 'type' => Type::int(),
                 'description' => 'Quantidade de registros'
@@ -50,20 +46,18 @@ class UserQuery extends Query
         $select = $fields->getSelect();
         $with = $fields->getRelations();
 
-        if (isset($args['id'])) {
-            return User::where('id', $args['id'])->get();
-        }
+        $paginate = 15;
 
         if (isset($args['paginate'])) {
-            $page = 1;
-            if (isset($args['page'])) {
-                $page = $args['page'];
-            }
-            return User::paginate($args['paginate'], ['*'], 'page', $page);
+            $paginate = $args['paginate'];
+            
         }
 
+        $page = 1;
 
-
-        return User::all();
+        if (isset($args['page'])) {
+            $page = $args['page'];
+        }
+        return User::paginate($paginate, ['*'], 'page', $page);
     }
 }

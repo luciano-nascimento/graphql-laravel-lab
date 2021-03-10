@@ -8,6 +8,7 @@ declare(strict_types=1);
 // use example\Type\ExampleType;
 
 use App\GraphQL\Queries\UserQuery;
+use App\GraphQL\Queries\UserPaginateQuery;
 use App\GraphQL\Types\UserType;
 
 return [
@@ -104,7 +105,8 @@ return [
     'schemas' => [
         'default' => [
             'query' => [
-                'users' => UserQuery::class
+                'users' => UserQuery::class,
+                'users_paginated' => UserPaginateQuery::class
             ],
             'method' => ['get', 'post'],
         ],
