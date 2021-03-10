@@ -13,10 +13,11 @@ create a graphql server using laravel
 You will need create Query (consult) using:   
 `php artisan make:graphql:query UserQuery`   
 This file will be created at app/GraphQL/Query/UserQuery.
+
 Also types will be necessary using:   
 `php artisan make:graphql:type UserType`
    
-Then config that in graphQ (config folder), will be necessary create schemas and types   
+Then config that in graphQ (config folder), will be necessary create schemas and types.   
    
 
  
