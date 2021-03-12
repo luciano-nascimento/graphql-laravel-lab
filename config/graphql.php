@@ -9,7 +9,10 @@ declare(strict_types=1);
 
 use App\GraphQL\Queries\UserQuery;
 use App\GraphQL\Queries\UserPaginateQuery;
+use App\GraphQL\Queries\PostQuery;
 use App\GraphQL\Types\UserType;
+use App\GraphQL\Types\PostType;
+use App\GraphQL\Mutations\CreatePostMutation;
 
 return [
 
@@ -106,7 +109,11 @@ return [
         'default' => [
             'query' => [
                 'users' => UserQuery::class,
-                'users_paginated' => UserPaginateQuery::class
+                'users_paginated' => UserPaginateQuery::class,
+                'posts' => PostQuery::class,
+            ],
+            'mutation' => [
+                'createPost' => CreatePostMutation::class
             ],
             'method' => ['get', 'post'],
         ],
@@ -125,7 +132,8 @@ return [
         // 'example'           => ExampleType::class,
         // 'relation_example'  => ExampleRelationType::class,
         // \Rebing\GraphQL\Support\UploadType::class,
-        'user' => UserType::class
+        'user' => UserType::class,
+        'post' => PostType::class,
     ],
 
     // The types will be loaded on demand. Default is to load all types on each request

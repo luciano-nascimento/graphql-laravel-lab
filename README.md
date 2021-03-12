@@ -19,5 +19,21 @@ Also types will be necessary using:
    
 Then config that in graphQL (config folder), will be necessary create schemas and types.   
    
+# Consult Example
 
- 
+```{
+  posts{
+    data{
+      title
+    }
+  },
+  users_paginated(page: 1) {
+		data {
+      id,
+      name,
+      posts{
+        title
+      }
+    }
+  }
+}```

@@ -58,6 +58,9 @@ class UserPaginateQuery extends Query
         if (isset($args['page'])) {
             $page = $args['page'];
         }
-        return User::paginate($paginate, ['*'], 'page', $page);
+
+        $with = $fields->getRelations();
+
+        return User::with($with)->paginate($paginate, ['*'], 'page', $page);
     }
 }
